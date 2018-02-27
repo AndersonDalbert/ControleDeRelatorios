@@ -12,3 +12,8 @@
 /comments CommentR POST
 
 /profile ProfileR GET
+
+-- Rotas do backend
+/cronograma CronogramaR GET
+
+/alunos AlunosR GET

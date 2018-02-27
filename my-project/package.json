@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "angular": "1.6.9",
+    "angular-route": "1.6.9",
+    "bootstrap": "4",
+    "jquery": "1.9.1",
+    "popper.js": "^1.12.9"
+  },
+  "name": "my-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT"
+}

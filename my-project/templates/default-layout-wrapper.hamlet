@@ -4,29 +4,27 @@ $newline never
 \<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
 \<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
 \<!--[if gt IE 8]><!-->
-<html class="no-js" lang="en"> <!--<![endif]-->
+<!doctype html>
+<html lang="en" ng-app="app">
   <head>
     <meta charset="UTF-8">
 
-    <title>#{pageTitle pc}
+    <title>{{ title }}
     <meta name="description" content="">
     <meta name="author" content="">
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <style link="rel" src="static/bower_components/bootstrap/dist/css/bootstrap.min.css">
-
+    <style link="rel" src="static/node_modules/bootstrap/dist/css/bootstrap.min.css">
 
     ^{pageHead pc}
 
  
-  <body>
-    ^{pageBody pc}
-
+<body>
     <div class="container" ng-controller="HomeCtrl">
       <div ng-view>
-    <script type="text/javascript" src="static/bower_components/bootstrap/dist/js/bootstrap.min.js">
-    <script type="text/javascript" src="static/bower_components/angular/angular.js">
-    <script type="text/javascript" src="static/bower_components/angular-route/angular-route.min.js">
+    <script type="text/javascript" src="static/node_modules/bootstrap/dist/js/bootstrap.min.js">
+    <script type="text/javascript" src="static/node_modules/angular/angular.js">
+    <script type="text/javascript" src="static/node_modules/angular-route/angular-route.min.js">
     <script type="text/javascript" src="static/scripts/app.js">
 

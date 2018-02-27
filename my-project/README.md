@@ -7,6 +7,12 @@
 
 If you have trouble, refer to the [Yesod Quickstart guide](https://www.yesodweb.com/page/quickstart) for additional detail.
 
+
+## Yarn Setup
+
+1. `sudo apt-get install yarn` or `brew install yarn`
+2. `yarn install --modules-folder static/node_modules`
+
 ## Development
 
 Start a development server with:
