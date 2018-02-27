@@ -2,7 +2,6 @@
 -- Syntax for this file here: https://www.yesodweb.com/book/routing-and-handlers
 
 /static StaticR Static appStatic
-/node_modules NodeR Static appStatic
 /auth   AuthR   Auth   getAuth
 
 /favicon.ico FaviconR GET
@@ -15,4 +14,4 @@
 /profile ProfileR GET
 
 -- Rotas do backend
--- /cronograma CronogramaR GET
+/cronograma CronogramaR GET

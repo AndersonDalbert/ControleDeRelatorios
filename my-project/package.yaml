@@ -46,6 +46,7 @@ dependencies:
 - case-insensitive
 - wai
 - foreign-store
+- dates >=0.2
 
 # The library contains all of our application code. The executable
 # defined below is just a thin wrapper.
