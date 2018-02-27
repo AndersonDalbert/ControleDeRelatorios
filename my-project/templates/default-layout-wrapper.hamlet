@@ -15,7 +15,7 @@ $newline never
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <style link="rel" src="static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <style link="rel" src="node_modules/bootstrap/dist/css/bootstrap.min.css">
 
     ^{pageHead pc}
 
@@ -23,9 +23,8 @@ $newline never
 <body>
     <div class="container" ng-controller="HomeCtrl">
       <div ng-view>
-    <script type="text/javascript" src="static/bower_components/jquery/dist/jquery.min.js">
-    <script type="text/javascript" src="static/bower_components/bootstrap/dist/js/bootstrap.min.js">
-    <script type="text/javascript" src="static/bower_components/angular/angular.js">
-    <script type="text/javascript" src="static/bower_components/angular-route/angular-route.min.js">
+    <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js">
+    <script type="text/javascript" src="node_modules/angular/angular.js">
+    <script type="text/javascript" src="node_modules/angular-route/angular-route.min.js">
     <script type="text/javascript" src="static/scripts/app.js">
 
