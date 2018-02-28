@@ -193,7 +193,7 @@ instance YesodBreadcrumbs App where
   breadcrumb ProfileR = return ("Profile", Just HomeR)
   breadcrumb CronogramaR = return ("Login", Just CronogramaR)
   breadcrumb  _ = return ("home", Nothing)
-  breadcrumb CronogramaR = return ("Login", Just CronogramaR)
+  breadcrumb AlunosR = return ("Login", Just CronogramaR)
 
 -- How to run database actions.
 instance YesodPersist App where

@@ -41,7 +41,10 @@ packages:
 # (e.g., acme-missiles-0.3)
 # extra-deps: []
 extra-deps: [
-  dates-0.2.2.1
+  dates-0.2.2.1,
+  double-conversion-2.0.2.0,
+  xlsx-0.7.0,
+  lens-4.16
 ]
 
 # Override default flag values for local packages and extra-deps
