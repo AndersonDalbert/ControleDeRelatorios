@@ -1,0 +1,30 @@
+<div>
+  <div class="jumbotron" style="background-color:#D1D1E0;">
+    <h1 class="text-center">
+      CRONOGRAMA DA DISCIPLINA
+    </h1>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>AULA</th>
+        <th>DATA</th>
+        <th>NOME</th>
+        <th>DESCRIÇÃO</th>
+      </tr>
+  </thead>
+    <tbody>
+      <tr ng-repeat="aula in cronograma">
+        <td class="align-middle">{{aula.idAula}}</td>
+        <td class="align-middle">{{aula.data_liberacao}}</td>
+        <td class="align-middle">{{aula.nome}}</td>
+        <td class="align-middle">
+          <p>{{aula.descricao}}<p>
+          <p><a href="{{aula.link_videoAula}}">Vídeo explicativo</a></p>
+          <p>Monitores: {{aula.monitores}}</p>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

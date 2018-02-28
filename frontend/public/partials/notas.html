@@ -1,0 +1,42 @@
+<div>
+  <div class="jumbotron" style="background-color:#D1D1E0;">
+    <h1 class="text-center">
+      PLANILHA DE NOTAS
+    </h1>
+  </div>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th >ALUNO</th>
+        <th>R01</th>
+        <th>R02</th>
+        <th>R03</th>
+        <th>R04</th>
+        <th>R05</th>
+        <th>R06</th>
+        <th>MR</th>
+        <th>PP</th>
+        <th>NP</th>
+        <th>PF<th>
+        <th>MF</th>
+      </tr>
+  </thead>
+    <tbody>
+      <tr ng-repeat="item in notas">
+        <td>{{item.aluno}}</td>
+        <td>{{item.nota_R01}}</td>
+        <td>{{item.nota_R02}}</td>
+        <td>{{item.nota_R03}}</td>
+        <td>{{item.nota_R04}}</td>
+        <td>{{item.nota_R05}}</td>
+        <td>{{item.nota_R06}}</td>
+        <td>{{item.media_roteiros}}</td>
+        <td>{{item.nota_prova}}</td>
+        <td>{{item.nota_projeto}}</td>
+        <td>{{item.nota_provaFinal}}</td>
+        <td>{{item.media_final}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

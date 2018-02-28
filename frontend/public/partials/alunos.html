@@ -1,0 +1,24 @@
+<div>
+  <div class="jumbotron" style="background-color:#D1D1E0;">
+    <h1 class="text-center">
+      ALUNOS MATRICULADOS
+    </h1>
+  </div>
+  
+ <table class="table table-striped">
+   <thead>
+     <tr>
+       <th>#</th>
+       <th>MATRÍCULA</th>
+       <th>NOME</th>
+     </tr>
+ </thead>
+   <tbody>
+     <tr ng-repeat="aluno in alunos">
+       <td>{{aluno.idAluno}}</td>
+       <td>{{aluno.matricula}}</td>
+       <td>{{aluno.nome}}</td>
+     </tr>
+   </tbody>
+ </table>
+ </div>
