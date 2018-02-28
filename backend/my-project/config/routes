@@ -16,4 +16,4 @@
 -- Rotas do backend
 /cronograma CronogramaR GET OPTIONS
 
-/alunos AlunosR GET
+/alunos AlunosR GET OPTIONS
