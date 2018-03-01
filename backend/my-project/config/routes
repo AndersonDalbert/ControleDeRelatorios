@@ -18,4 +18,4 @@
 
 /alunos AlunosR GET OPTIONS
 
-/notas NotasR GET
+/notas NotasR GET OPTIONS

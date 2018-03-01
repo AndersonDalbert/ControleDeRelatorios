@@ -96,13 +96,13 @@ preMakeItems rows = [Nota ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text
 extractRowsFromXlsx :: Xlsx -> [(Int, [(Int, Cell)])]
 extractRowsFromXlsx (Xlsx [] _ _ _ _) = []
 extractRowsFromXlsx (Xlsx ((_, (Worksheet _ _ cells _ _ _ _ _ _ _ _ _ _ _)):_) _ _ _ _) = toRows cells
-
+-}
 optionsNotasR :: Handler RepPlain
 optionsNotasR = do
     addHeader "Access-Control-Allow-Origin" "*"
     addHeader "Access-Control-Allow-Methods" "GET, OPTIONS"
     return $ RepPlain $ toContent ("" :: Text)
--}
+
 getNotasR :: Handler TypedContent
 getNotasR = do return $ TypedContent "application/json"
 																$ toContent $(embedFile "data/notas.json")
