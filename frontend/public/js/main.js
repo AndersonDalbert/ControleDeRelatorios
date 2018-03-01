@@ -13,5 +13,9 @@ angular.module('app', ['ngRoute'])
     .when('/notas', {
       templateUrl: 'partials/notas.html',
       controller: 'NotasController'
+    })
+    .when('/report/:atividadeId', {
+      templateUrl: 'partials/report.html',
+      controller: 'ReportController'
     });
 });

@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="jumbotron" style="background-color:#D1D1E0;">
+    <h1 class="text-center">
+      <p>RELATÓRIO DE CORREÇÃO</p>
+      <p>{{atividade}}</p>
+    </h1>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ALUNO</th>
+        <th>DATA ENVIO</th>
+        <th>PASSOU</th>
+        <th>ERROS</th>
+        <th>FALHAS</th>
+        <th>PULADOS</th>
+        <th>TEMPO</th>
+        <th>T</th>
+        <th>D</th>
+        <th>F</th>
+        <th>DETALHES<th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="nota in notas_atividade">
+        <td>{{nota.aluno}}</td>
+        <td>{{nota.dataEnvio}}</td>
+        <td>{{nota.passou}}</td>
+        <td>{{nota.erros}}</td>
+        <td>{{nota.falhas}}</td>
+        <td>{{nota.pulados}}</td>
+        <td>{{nota.tempo}}</td>
+        <td>{{nota.nota_testes}}</td>
+        <td>{{nota.nota_design}}</td>
+        <td>{{nota.nota_total}}</td>
+        <td>{{nota.detalhes}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
