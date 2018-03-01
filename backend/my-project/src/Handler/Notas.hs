@@ -3,6 +3,9 @@
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+
 module Handler.Notas where
 
 import Import
@@ -10,6 +13,8 @@ import Text.Printf
 import Codec.Xlsx
 import qualified Data.ByteString.Lazy as L
 import Data.Dates
+import Data.Text (Text)
+import Data.FileEmbed (embedFile)
 
 data Nota = Nota
   	{ idNota :: Text
@@ -25,7 +30,7 @@ data Nota = Nota
     , projeto :: Text
     , provaFinal :: Text
     , mediaFinal :: Text
-}
+} deriving (Eq,Show)
 
 instance ToJSON Nota where
   toJSON Nota {..} = object
@@ -44,7 +49,7 @@ instance ToJSON Nota where
       , "mediaFinal" .= mediaFinal
       ]
 
-getRows :: Maybe CellMap -> [(Int, [(Int, Cell)])]
+{-getRows :: Maybe CellMap -> [(Int, [(Int, Cell)])]
 getRows Nothing = []
 getRows (Just a) = toRows a
 
@@ -83,8 +88,10 @@ makeItems [] = []
 makeItems ((_, row):xs) = (makeItem (collectTexts row)) Prelude.++ (makeItems xs)
 
 preMakeItems :: [(Int, [(Int, Cell)])] -> [Nota]
-preMakeItems [] = []
-preMakeItems rows = makeItems (Prelude.tail (Prelude.tail rows))
+--preMakeItems [] = []
+preMakeItems [] = [Nota ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text), Nota ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text)]
+preMakeItems rows = [Nota ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text), Nota ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text) ("a" :: Text)]
+--preMakeItems rows = makeItems (Prelude.tail (Prelude.tail rows))
 
 extractRowsFromXlsx :: Xlsx -> [(Int, [(Int, Cell)])]
 extractRowsFromXlsx (Xlsx [] _ _ _ _) = []
@@ -95,10 +102,12 @@ optionsNotasR = do
     addHeader "Access-Control-Allow-Origin" "*"
     addHeader "Access-Control-Allow-Methods" "GET, OPTIONS"
     return $ RepPlain $ toContent ("" :: Text)
-
-getNotasR :: Handler Value
-getNotasR = do
-    addHeader "Access-Control-Allow-Origin" "*"
-    bs <- liftIO $ L.readFile "./data/notas.xlsx"
-    let xlsx = toXlsx bs
-    returnJson $ preMakeItems (extractRowsFromXlsx xlsx)
+-}
+getNotasR :: Handler TypedContent
+getNotasR = do return $ TypedContent "application/json"
+																$ toContent $(embedFile "data/notas.json")
+--getNotasR = do
+    --addHeader "Access-Control-Allow-Origin" "*"
+    --bs <- liftIO $ L.readFile "./data/notas.xlsx"
+    --let xlsx = toXlsx bs
+    --returnJson $ preMakeItems (extractRowsFromXlsx xlsx)
