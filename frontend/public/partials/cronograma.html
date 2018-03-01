@@ -16,12 +16,12 @@
   </thead>
     <tbody>
       <tr ng-repeat="aula in cronograma">
-        <td class="align-middle">{{aula.idAula}}</td>
-        <td class="align-middle">{{aula.data_liberacao}}</td>
+        <td class="align-middle">{{aula.itemid}}</td>
+        <td class="align-middle">{{aula.liberacao}}</td>
         <td class="align-middle">{{aula.nome}}</td>
         <td class="align-middle">
           <p>{{aula.descricao}}<p>
-          <p><a href="{{aula.link_videoAula}}">Vídeo explicativo</a></p>
+          <p>{{aula.links}}</p>
           <p>Monitores: {{aula.monitores}}</p>
           </td>
       </tr>
