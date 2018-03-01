@@ -17,3 +17,5 @@
 /cronograma CronogramaR GET OPTIONS
 
 /alunos AlunosR GET OPTIONS
+
+/notas NotasR GET OPTIONS

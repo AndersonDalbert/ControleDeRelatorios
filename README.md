@@ -1,17 +1,10 @@
-# Backend-Controle_de_Relatorios
-Backend do sistema de alunos utilizando o framework Yesod.
+# Controle_de_Relatorios
 
-Rotas/funcionalidades a serem implementadas:
+ATENÇÃO
+O QUE FALTA/PROBLEMAS:
 
+1. A rota de Notas no backend não está convertendo a planilha em json de forma correta, apenas retorna uma lista vazia, o que impede que o front exiba as notas corretamente.
 
-Lista de alunos: receber um json com os alunos da disciplina e exibir.
-rota: /alunos
+2. Falta configurar uma rota coringa no backend para exibir os reports das atividades (algo do tipo http://localhost:3000/report/:id), e depois integrá-la com o frontend.
 
-Calendário da disciplina: receber a planilha da disciplina e exibir.
-rota: /cronograma
-
-Relatório geral: receber um JSON via rest e exibir.
-rota: /notas
-
-Relatório de cada atividade: receber um JSON via REST gerado pela correção automática das atividadades e exibir. O link para essa exibição deve estar na célula da atividade correspondente no cronograma.
-rota: /report?id=XXXX
+3. A rota de alunos está funcionando mas por algum motivo não captura todos os estudantes da planilha, então só são exibidos alguns.

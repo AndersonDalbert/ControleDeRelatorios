@@ -11,10 +11,10 @@
       <tr>
         <th>ALUNO</th>
         <th>DATA ENVIO</th>
-        <th>PASSOU</th>
-        <th>ERROS</th>
-        <th>FALHAS</th>
-        <th>PULADOS</th>
+        <th class="text-success">PASSOU</th>
+        <th class="text-danger">ERROS</th>
+        <th class="text-primary">FALHAS</th>
+        <th class="text-warning">PULADOS</th>
         <th>TEMPO</th>
         <th>T</th>
         <th>D</th>
@@ -24,17 +24,17 @@
     </thead>
     <tbody>
       <tr ng-repeat="nota in notas_atividade">
-        <td>{{nota.aluno}}</td>
-        <td>{{nota.dataEnvio}}</td>
-        <td>{{nota.passou}}</td>
-        <td>{{nota.erros}}</td>
-        <td>{{nota.falhas}}</td>
-        <td>{{nota.pulados}}</td>
-        <td>{{nota.tempo}}</td>
-        <td>{{nota.nota_testes}}</td>
-        <td>{{nota.nota_design}}</td>
-        <td>{{nota.nota_total}}</td>
-        <td>{{nota.detalhes}}</td>
+        <td class="align-center">{{nota.aluno}}</td>
+        <td class="align-center">{{nota.dataEnvio}}</td>
+        <td class="align-center">{{nota.passou}}</td>
+        <td class="align-center">{{nota.erros}}</td>
+        <td class="align-center">{{nota.falhas}}</td>
+        <td class="align-center">{{nota.pulados}}</td>
+        <td class="align-center">{{nota.tempo}}</td>
+        <td class="align-center">{{nota.nota_testes}}</td>
+        <td class="align-center">{{nota.nota_design}}</td>
+        <td class="align-center">{{nota.nota_total}}</td>
+        <td class="align-center">{{nota.detalhes}}</td>
       </tr>
     </tbody>
   </table>
