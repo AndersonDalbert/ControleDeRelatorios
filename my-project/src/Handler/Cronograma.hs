@@ -86,8 +86,15 @@ extractRowsFromXlsx :: Xlsx -> [(Int, [(Int, Cell)])]
 extractRowsFromXlsx (Xlsx [] _ _ _ _) = []
 extractRowsFromXlsx (Xlsx ((_, (Worksheet _ _ cells _ _ _ _ _ _ _ _ _ _ _)):_) _ _ _ _) = toRows cells
 
+optionsCronogramaR :: Handler RepPlain
+optionsCronogramaR = do
+    addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Methods" "GET, OPTIONS"
+    return $ RepPlain $ toContent ("" :: Text)
+    
 getCronogramaR :: Handler Value
 getCronogramaR = do
+    addHeader "Access-Control-Allow-Origin" "*"
     bs <- liftIO $ L.readFile "./data/cronograma.xlsx"
     let xlsx = toXlsx bs
     returnJson $ preMakeItems (extractRowsFromXlsx xlsx)
