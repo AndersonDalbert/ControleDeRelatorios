@@ -7,7 +7,7 @@ angular.module('app').controller('NotasController',
       function(response) {
         console.log(response);
         if (response.status == 200) {
-          $scope.alunos = response.data;
+          $scope.notas = response.data;
         } else {
           console.log("Response code different from 200");
           console.log(response);
