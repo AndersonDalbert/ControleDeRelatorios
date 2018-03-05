@@ -1,41 +1,39 @@
-<div class="container">
-  <div class="jumbotron" style="background-color:#D1D1E0;">
-    <h1 class="text-center">
-      <p>RELATÓRIO DE CORREÇÃO</p>
-      <p>{{atividade}}</p>
-    </h1>
-  </div>
-
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>ALUNO</th>
-        <th>DATA ENVIO</th>
-        <th class="text-success">PASSOU</th>
-        <th class="text-danger">ERROS</th>
-        <th class="text-primary">FALHAS</th>
-        <th class="text-warning">PULADOS</th>
-        <th>TEMPO</th>
-        <th>T</th>
-        <th>D</th>
-        <th>F</th>
-        <th>DETALHES<th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="nota in notas_atividade">
-        <td class="align-center">{{nota.aluno}}</td>
-        <td class="align-center">{{nota.dataEnvio}}</td>
-        <td class="align-center">{{nota.passou}}</td>
-        <td class="align-center">{{nota.erros}}</td>
-        <td class="align-center">{{nota.falhas}}</td>
-        <td class="align-center">{{nota.pulados}}</td>
-        <td class="align-center">{{nota.tempo}}</td>
-        <td class="align-center">{{nota.nota_testes}}</td>
-        <td class="align-center">{{nota.nota_design}}</td>
-        <td class="align-center">{{nota.nota_total}}</td>
-        <td class="align-center">{{nota.detalhes}}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="jumbotron" style="background-color:#660066;">
+  <h1 class="text-center text-white">
+    <p>RELATÓRIO DE CORREÇÃO</p>
+    <p>{{atividade}}</p>
+  </h1>
 </div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ALUNO</th>
+      <th>DATA ENVIO</th>
+      <th class="text-success">PASSOU</th>
+      <th class="text-danger">ERROS</th>
+      <th class="text-primary">FALHAS</th>
+      <th class="text-warning">PULADOS</th>
+      <th>TEMPO</th>
+      <th>T</th>
+      <th>D</th>
+      <th>F</th>
+      <th>DETALHES<th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="nota in notas_atividade">
+      <td class="align-center">{{nota.aluno}}</td>
+      <td class="align-center">{{nota.dataEnvio}}</td>
+      <td class="align-center">{{nota.passou}}</td>
+      <td class="align-center">{{nota.erros}}</td>
+      <td class="align-center">{{nota.falhas}}</td>
+      <td class="align-center">{{nota.pulados}}</td>
+      <td class="align-center">{{nota.tempo}}</td>
+      <td class="align-center">{{nota.nota_testes}}</td>
+      <td class="align-center">{{nota.nota_design}}</td>
+      <td class="align-center">{{nota.nota_total}}</td>
+      <td class="align-center">{{nota.detalhes}}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,42 +1,40 @@
-<div class="container">
-  <div class="jumbotron" style="background-color:#D1D1E0;">
-    <h1 class="text-center">
-      PLANILHA DE NOTAS
-    </h1>
-  </div>
-
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>ALUNO</th>
-        <th><a ng-href="/#!/report/R01" data-toggle="tooltip" title="Roteiro 01 - Relatório detalhado de correção">R01</a></th>
-        <th><a ng-href="/#!/report/R02" data-toggle="tooltip" title="Roteiro 02 - Relatório detalhado de correção">R02</a></th>
-        <th><a ng-href="/#!/report/R03" data-toggle="tooltip" title="Roteiro 03 - Relatório detalhado de correção">R03</a></th>
-        <th><a ng-href="/#!/report/R04" data-toggle="tooltip" title="Roteiro 04 - Relatório detalhado de correção">R04</a></th>
-        <th><a ng-href="/#!/report/R05" data-toggle="tooltip" title="Roteiro 05 - Relatório detalhado de correção">R05</a></th>
-        <th><a ng-href="/#!/report/R06" data-toggle="tooltip" title="Roteiro 06 - Relatório detalhado de correção">R06</a></th>
-        <th data-toggle="tooltip" title="Média dos roteiros">MR</th>
-        <th><a ng-href="/#!/report/PP" data-toggle="tooltip" title="Prova Prática - Relatório detalhado de correção">PP</a></th>
-        <th><a ng-href="/#!/report/PR" data-toggle="tooltip" title="Projeto - Relatório detalhado de correção">PR</a></th>
-        <th><a ng-href="/#!/report/PF" data-toggle="tooltip" title="Prova Final - Relatório detalhado de correção">PF</a></th>
-        <th class="text-danger" data-toggle="tooltip" title="Média Final">MF</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="item in notas">
-        <td>{{item.aluno}}</td>
-        <td>{{item.nota_R01}}</td>
-        <td>{{item.nota_R02}}</td>
-        <td>{{item.nota_R03}}</td>
-        <td>{{item.nota_R04}}</td>
-        <td>{{item.nota_R05}}</td>
-        <td>{{item.nota_R06}}</td>
-        <td>{{item.media_roteiros}}</td>
-        <td>{{item.nota_prova}}</td>
-        <td>{{item.nota_projeto}}</td>
-        <td>{{item.nota_provaFinal}}</td>
-        <td>{{item.media_final}}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="jumbotron" style="background-color:#660066;">
+  <h1 class="text-center text-white">
+    NOTAS
+  </h1>
 </div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ALUNO</th>
+      <th><a ng-href="/#!/report/R01" data-toggle="tooltip" title="Roteiro 01 - Relatório detalhado de correção">R01</a></th>
+      <th><a ng-href="/#!/report/R02" data-toggle="tooltip" title="Roteiro 02 - Relatório detalhado de correção">R02</a></th>
+      <th><a ng-href="/#!/report/R03" data-toggle="tooltip" title="Roteiro 03 - Relatório detalhado de correção">R03</a></th>
+      <th><a ng-href="/#!/report/R04" data-toggle="tooltip" title="Roteiro 04 - Relatório detalhado de correção">R04</a></th>
+      <th><a ng-href="/#!/report/R05" data-toggle="tooltip" title="Roteiro 05 - Relatório detalhado de correção">R05</a></th>
+      <th><a ng-href="/#!/report/R06" data-toggle="tooltip" title="Roteiro 06 - Relatório detalhado de correção">R06</a></th>
+      <th data-toggle="tooltip" title="Média dos roteiros">MR</th>
+      <th><a ng-href="/#!/report/PP" data-toggle="tooltip" title="Prova Prática - Relatório detalhado de correção">PP</a></th>
+      <th><a ng-href="/#!/report/PR" data-toggle="tooltip" title="Projeto - Relatório detalhado de correção">PR</a></th>
+      <th><a ng-href="/#!/report/PF" data-toggle="tooltip" title="Prova Final - Relatório detalhado de correção">PF</a></th>
+      <th class="text-danger" data-toggle="tooltip" title="Média Final">MF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="item in notas">
+      <td>{{item.aluno}}</td>
+      <td>{{item.nota_R01}}</td>
+      <td>{{item.nota_R02}}</td>
+      <td>{{item.nota_R03}}</td>
+      <td>{{item.nota_R04}}</td>
+      <td>{{item.nota_R05}}</td>
+      <td>{{item.nota_R06}}</td>
+      <td>{{item.media_roteiros}}</td>
+      <td>{{item.nota_prova}}</td>
+      <td>{{item.nota_projeto}}</td>
+      <td>{{item.nota_provaFinal}}</td>
+      <td>{{item.media_final}}</td>
+    </tr>
+  </tbody>
+</table>

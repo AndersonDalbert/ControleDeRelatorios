@@ -2,6 +2,9 @@ angular.module('app', ['ngRoute'])
   .config(function($routeProvider) {
 
     $routeProvider
+    .when('/', {
+      templateUrl: 'partials/home.html',
+    })
     .when('/alunos', {
       templateUrl: 'partials/alunos.html',
       controller: 'AlunosController'

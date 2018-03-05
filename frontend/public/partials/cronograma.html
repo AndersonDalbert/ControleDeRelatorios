@@ -1,30 +1,28 @@
-<div>
-  <div class="jumbotron" style="background-color:#D1D1E0;">
-    <h1 class="text-center">
-      CRONOGRAMA DA DISCIPLINA
-    </h1>
-  </div>
-
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>AULA</th>
-        <th>DATA</th>
-        <th>NOME</th>
-        <th>DESCRIÇÃO</th>
-      </tr>
-  </thead>
-    <tbody>
-      <tr ng-repeat="aula in cronograma">
-        <td class="align-middle"><b>{{aula.itemid}}</b></td>
-        <td class="align-middle">{{aula.liberacao}}</td>
-        <td class="align-middle">{{aula.nome}}</td>
-        <td class="align-middle">
-          <p>{{aula.descricao}}<p>
-          <p><i>{{aula.links}}</i></p>
-          <p><b>Monitores:</b> {{aula.monitores}}</p>
-          </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="jumbotron" style="background-color:#660066;">
+  <h1 class="text-center text-white">
+    CRONOGRAMA DA DISCIPLINA
+  </h1>
 </div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>AULA</th>
+      <th>DATA</th>
+      <th>NOME</th>
+      <th>DESCRIÇÃO</th>
+    </tr>
+</thead>
+  <tbody>
+    <tr ng-repeat="aula in cronograma">
+      <td class="align-middle"><b>{{aula.itemid}}</b></td>
+      <td class="align-middle">{{aula.liberacao}}</td>
+      <td class="align-middle">{{aula.nome}}</td>
+      <td class="align-middle">
+        <p>{{aula.descricao}}<p>
+        <p><i>{{aula.links}}</i></p>
+        <p><b>Monitores:</b> {{aula.monitores}}</p>
+        </td>
+    </tr>
+  </tbody>
+</table>
