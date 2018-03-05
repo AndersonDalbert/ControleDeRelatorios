@@ -19,3 +19,4 @@
 /alunos AlunosR GET OPTIONS
 
 /notas NotasR GET OPTIONS
+/report/#Text AtividadesR GET
