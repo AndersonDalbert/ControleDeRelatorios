@@ -22,3 +22,5 @@ my-project.cabal
 node_modules
 package-lock.json
 yarn.lock
+*.log
+*.aes

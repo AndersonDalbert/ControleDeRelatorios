@@ -6,23 +6,21 @@
 module Handler.Alunos where
 
 import Import
-import Text.Printf
 import Codec.Xlsx
 import qualified Data.ByteString.Lazy as L
-import Data.Dates
 
 data Aluno = Aluno
-	{ index :: Text
-	, matricula :: Text
-	, nome :: Text
+    { aindex :: Text
+    , matricula :: Text
+    , nome :: Text
 }
 
 instance ToJSON Aluno where
-	toJSON Aluno {..} = object
-		[ "index" .= index
-		, "matricula" .= matricula
-		, "nome" .= nome
-		]
+    toJSON Aluno {..} = object
+        [ "aindex" .= aindex
+        , "matricula" .= matricula
+        , "nome" .= nome
+        ]
 
 getRows :: Maybe CellMap -> [(Int, [(Int, Cell)])]
 getRows Nothing = []
@@ -34,20 +32,21 @@ getValue (Just (CellText text)) = text
 getValue (Just (CellRich (RichTextRun _ text:_))) = text
 getValue _ = ""
 
-collectTexts :: [(Int, Cell)] -> [Text]
-collectTexts [] = []
-collectTexts ((_, (Cell _ Nothing _ _)):xs) = collectTexts xs
-collectTexts ((_, (Cell _ val _ _)):xs) = [getValue val] Prelude.++ collectTexts xs
+collectTexts :: [(Int, Cell)] -> Int -> [Text]
+collectTexts [] _ = []
+collectTexts ((_, (Cell _ Nothing _ _)):_) 3 = []
+collectTexts ((_, (Cell _ Nothing _ _)):xs) x = collectTexts xs (x + 1)
+collectTexts ((_, (Cell _ val _ _)):_) 3 = [getValue val]
+collectTexts ((_, (Cell _ val _ _)):xs) x = [getValue val] Prelude.++ collectTexts xs (x + 1)
 
 makeItem :: [Text] -> [Aluno]
 makeItem [] = []
-makeItem [index, matricula, nome] =
-     [Aluno index matricula nome]
+makeItem [aindex, matricula, nome] = [Aluno aindex matricula nome]
 makeItem _ = []
 
 makeItems :: [(Int, [(Int, Cell)])] -> [Aluno]
 makeItems [] = []
-makeItems ((_, row):xs) = (makeItem (collectTexts row)) Prelude.++ (makeItems xs)
+makeItems ((_, row):xs) = (makeItem (collectTexts row 1)) Prelude.++ (makeItems xs)
 
 preMakeItems :: [(Int, [(Int, Cell)])] -> [Aluno]
 preMakeItems [] = []
@@ -63,10 +62,9 @@ optionsAlunosR = do
     addHeader "Access-Control-Allow-Methods" "GET, OPTIONS"
     return $ RepPlain $ toContent ("" :: Text)
 
-
 getAlunosR :: Handler Value
 getAlunosR = do
-	addHeader "Access-Control-Allow-Origin" "*"
-	bs <- liftIO $ L.readFile "./data/alunos.xlsx"
-	let xlsx = toXlsx bs
-	returnJson $ preMakeItems (extractRowsFromXlsx xlsx)
+    addHeader "Access-Control-Allow-Origin" "*"
+    bs <- liftIO $ L.readFile "./data/alunos.xlsx"
+    let xlsx = toXlsx bs
+    returnJson $ preMakeItems (extractRowsFromXlsx xlsx)
