@@ -11,11 +11,11 @@ import {Observable} from 'rxjs/Rx';
 
 export class AlunosComponent implements OnInit {
 
-  title = 'Alunos';
   public alunos;
-  constructor(private _alunosService: AlunosService) { }
+  constructor(private _alunosService: AlunosService, private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Alunos - Programação Funcional UFCG');
     this.getAlunos();
   }
 

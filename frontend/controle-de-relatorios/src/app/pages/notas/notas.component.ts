@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotasService } from '../../services/notas/notas.service';
 import { Observable } from 'rxjs/Rx';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-notas',
@@ -10,9 +11,10 @@ import { Observable } from 'rxjs/Rx';
 export class NotasComponent implements OnInit {
 
   public notas;
-  constructor(private _notasService: NotasService) { }
+  constructor(private _notasService: NotasService, private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Notas - Programação Funcional UFCG');
     this.getNotas();
   }
 

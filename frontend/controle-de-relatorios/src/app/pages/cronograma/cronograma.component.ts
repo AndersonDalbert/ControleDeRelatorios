@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CronogramaService } from '../../services/cronograma/cronograma.service';
 import {Observable} from 'rxjs/Rx';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-cronograma',
@@ -10,9 +11,10 @@ import {Observable} from 'rxjs/Rx';
 export class CronogramaComponent implements OnInit {
 
   public cronograma;
-  constructor(private _cronogramaService: CronogramaService) { }
+  constructor(private _cronogramaService: CronogramaService, private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Cronograma - Programação Funcional UFCG');
     this.getCronograma();
   }
 

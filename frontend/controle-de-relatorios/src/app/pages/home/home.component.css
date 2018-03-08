@@ -1,0 +1,4 @@
+[class*="col-"] {
+    background-clip: padding-box;
+    border: 60px solid transparent;
+}

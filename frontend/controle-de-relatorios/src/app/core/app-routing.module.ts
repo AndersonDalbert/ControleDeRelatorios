@@ -14,7 +14,8 @@ const routes: Routes = [
   },
   {
     path: 'alunos',
-    component: AlunosComponent
+    component: AlunosComponent,
+    data: {title: 'Alunos'}
   },
   {
     path: 'cronograma',
