@@ -1,8 +1,8 @@
 # Controle_de_Relatorios
 
-ATENÇÃO!
-
-O QUE FALTA/PROBLEMAS:
-
-1. Falta configurar uma rota coringa no backend para exibir os reports das atividades (algo do tipo http://localhost:3000/report/:id), e depois integrá-la com o frontend já construído (public/js/controllers/ReportController.js).
-
+Funcionalidades:
+- Gerar lista de alunos
+- Gerar relatório de atividades (resultados) com notas
+  * Relatorio geral - mostrando todas as notas ao longo do semestre e o cômputo geral.
+  * Relatorio de testes de cada atividade
+- Gerar calendário da disciplina
