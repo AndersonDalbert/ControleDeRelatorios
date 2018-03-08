@@ -1,4 +1,8 @@
 [class*="col-"] {
     background-clip: padding-box;
-    border: 60px solid transparent;
+    border: 10px solid transparent;
+}
+
+[class*="container-"] {
+  margin-top: 40px;
 }
