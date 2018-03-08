@@ -44,4 +44,4 @@ instance ToJSON Atividade where
 
 getAtividadesR :: Text -> Handler TypedContent
 getAtividadesR text = do return $ TypedContent "application/json"
-																$ toContent $(embedFile "data/E01-01.json")
+																$ toContent $(embedFile "data/R01.json")

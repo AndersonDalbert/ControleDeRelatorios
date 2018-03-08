@@ -15,18 +15,18 @@
     </tr>
   </thead>
   <tbody>
-  <!--  <tr *ngFor="nota of notas_atividade">
-      <td class="align-center">{{nota.aluno}}</td>
+    <tr *ngFor="let nota of notas_atividade">
+      <td class="align-center">{{nota.nome}}</td>
       <td class="align-center">{{nota.dataEnvio}}</td>
       <td class="align-center">{{nota.passou}}</td>
       <td class="align-center">{{nota.erros}}</td>
       <td class="align-center">{{nota.falhas}}</td>
       <td class="align-center">{{nota.pulados}}</td>
       <td class="align-center">{{nota.tempo}}</td>
-      <td class="align-center">{{nota.nota_testes}}</td>
-      <td class="align-center">{{nota.nota_design}}</td>
-      <td class="align-center">{{nota.nota_total}}</td>
-      <td class="align-center">{{nota.detalhes}}</td>
-    </tr> -->
+      <td class="align-center">{{nota.notaTestes}}</td>
+      <td class="align-center">{{nota.notaDesign}}</td>
+      <td class="align-center">{{nota.nota}}</td>
+      <td class="align-center"><a>Detalhes</a></td>
+    </tr>
   </tbody>
 </table>
