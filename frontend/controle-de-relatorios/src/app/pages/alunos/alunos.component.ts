@@ -11,6 +11,7 @@ import {Observable} from 'rxjs/Rx';
 
 export class AlunosComponent implements OnInit {
 
+  title = 'Alunos';
   public alunos;
   constructor(private _alunosService: AlunosService) { }
 

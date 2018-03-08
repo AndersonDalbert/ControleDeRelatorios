@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotasService } from '../../services/notas/notas.service';
-import {Observable} from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-notas',
