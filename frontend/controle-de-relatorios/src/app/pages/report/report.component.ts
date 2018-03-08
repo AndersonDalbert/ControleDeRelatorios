@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ReportService } from '../../services/report/report.service';
 import { Observable } from 'rxjs/Rx';
 import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-report',
@@ -15,9 +16,10 @@ export class ReportComponent implements OnInit {
   public notas_atividade;
   pageTitle = "Relatório de Correção";
 
-  constructor(private _reportService: ReportService, private route: ActivatedRoute) { }
+  constructor(private _reportService: ReportService, private route: ActivatedRoute, private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Relatório de Correção - Programação Funcional UFCG');
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
       console.log(this.id);
