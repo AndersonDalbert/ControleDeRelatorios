@@ -20,8 +20,10 @@ module Application
     , db
     ) where
 
+import LoadEnv
+
 import Control.Monad.Logger                 (liftLoc, runLoggingT)
-import Database.Persist.Sqlite              (createSqlitePool, runSqlPool,
+import Database.Persist.Sqlite              (rawExecute, createSqlitePool, runSqlPool,
                                              sqlDatabase, sqlPoolSize)
 import Import
 import Language.Haskell.TH.Syntax           (qLocation)
@@ -48,6 +50,8 @@ import Handler.Alunos
 import Handler.Notas
 import Handler.Atividades
 
+import System.Environment
+
 -- This line actually creates our YesodDispatch instance. It is the second half
 -- of the call to mkYesodData which occurs in Foundation.hs. Please see the
 -- comments there for more details.
@@ -66,7 +70,10 @@ makeFoundation appSettings = do
     appStatic <-
         (if appMutableStatic appSettings then staticDevel else static)
         (appStaticDir appSettings)
-
+    
+    clientId <- fmap pack $ getEnv "CLIENT_ID"
+    clientSecret <- fmap pack $ getEnv "CLIENT_SECRET"
+    configIssuer <- fmap pack $ getEnv "ISSUER"
     -- We need a log function to create a connection pool. We need a connection
     -- pool to create our foundation. And we need our foundation to get a
     -- logging function. To get out of this loop, we initially create a

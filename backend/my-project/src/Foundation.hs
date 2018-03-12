@@ -13,17 +13,15 @@ import Import.NoFoundation
 import Database.Persist.Sql (ConnectionPool, runSqlPool)
 import Text.Hamlet          (hamletFile)
 import Text.Jasmine         (minifym)
-import Data.Text (Text)
 
--- Used only when in "auth-dummy-login" setting is enabled.
-import Yesod.Auth.Dummy
-
-import Yesod.Auth.OpenId    (authOpenId, IdentifierType (Claimed))
 import Yesod.Default.Util   (addStaticContentExternal)
 import Yesod.Core.Types     (Logger)
+import Yesod.Auth.Message
 import qualified Yesod.Core.Unsafe as Unsafe
-import qualified Data.CaseInsensitive as CI
-import qualified Data.Text.Encoding as TE
+
+import Data.ByteString.Char8 as C8
+import qualified Web.JWT as JWT
+import Data.Time.Clock.POSIX
 
 -- | The foundation datatype for your application. This can be a good place to
 -- keep settings and values requiring initialization before your application
@@ -35,6 +33,9 @@ data App = App
     , appConnPool    :: ConnectionPool -- ^ Database connection pool.
     , appHttpManager :: Manager
     , appLogger      :: Logger
+    , clientId       :: Text
+    , clientSecret   :: Text
+    , configIssuer   :: Text
     }
 
 data MenuItem = MenuItem
@@ -60,6 +61,9 @@ data MenuTypes
 -- type Handler = HandlerT App IO
 -- type Widget = WidgetT App IO ()
 mkYesodData "App" $(parseRoutesFile "config/routes")
+
+email_domain_permitted :: [Char]
+email_domain_permitted = "ccc.ufcg.edu.br"
 
 -- | A convenient synonym for creating forms.
 type Form x = Html -> MForm (HandlerT App IO) (FormResult x, Widget)
@@ -155,7 +159,10 @@ instance Yesod App where
     isAuthorized RobotsR _ = return Authorized
     isAuthorized (StaticR _) _ = return Authorized
 
-    isAuthorized ProfileR _ = isAuthenticated
+    isAuthorized (UsuarioR _) _ = return Authorized
+    isAuthorized UsuarioR _ = return Authorized
+    isAuthorized ProfileR _ = validateToken
+
     isAuthorized CronogramaR _ = return Authorized
     isAuthorized AlunosR _ = return Authorized
     isAuthorized NotasR _ = return Authorized
@@ -208,6 +215,9 @@ instance YesodPersist App where
 instance YesodPersistRunner App where
     getDBRunner = defaultGetDBRunner appConnPool
 
+isDomainPermitted :: ByteString -> Bool
+isDomainPermitted domain = (C8.unpack domain) == email_domain_permitted
+
 instance YesodAuth App where
     type AuthId App = UserId
 
@@ -218,29 +228,48 @@ instance YesodAuth App where
     -- Override the above two destinations when a Referer: header is present
     redirectToReferer _ = True
 
-    authenticate creds = runDB $ do
-        x <- getBy $ UniqueUser $ credsIdent creds
-        case x of
-            Just (Entity uid _) -> return $ Authenticated uid
-            Nothing -> Authenticated <$> insert User
-                { userIdent = credsIdent creds
-                , userPassword = Nothing
-                }
+    authenticate _ = return $ UserError $ InvalidEmailAddress
 
     -- You can add other plugins like Google Email, email or OAuth here
-    authPlugins app = [authOpenId Claimed []] ++ extraAuthPlugins
-        -- Enable authDummy login if enabled.
-        where extraAuthPlugins = [authDummy | appAuthDummyLogin $ appSettings app]
+    authPlugins _ = []
 
     authHttpManager = getHttpManager
+    renderAuthMessage _ _ = portugueseMessage
+
+isDataExpired :: Maybe JWT.NumbericDate -> Maybe JWT.NumbericDate -> Maybe Bool
+isDataExpired exptime currtime = (<) <$> exptime <*> currtime
 
 -- | Access function to determine if a user is logged in.
-isAuthenticated :: Handler AuthResult
-isAuthenticated = do
-    muid <- maybeAuthId
-    return $ case muid of
-        Nothing -> Unauthorized "You must login to access this page"
-        Just _ -> Authorized
+validateToken :: Handler AuthResult
+validateToken = do
+    bearerToken <- lookupBearerAuth
+    master <- getYesod
+    when (isNothing bearerToken) $ permissionDenied "Token não encontrado nos headers."
+    let decodedAndVerified  = join $ JWT.decode <$> bearerToken
+        claimset            = JWT.claims <$> decodedAndVerified
+        audience            = join $ JWT.aud <$> claimset
+        --attributes          = join $ Map.lookup "uri" <$> JWT.unregisteredClaims <$> claimset
+        iss = join $ JWT.iss <$> claimset
+        expiration = join $ JWT.exp <$> claimset
+        -- In a production system, store the jti
+        -- values to guard against a replay attack.
+        -- jti = join $ JWT.jti <$> claimset
+    case audience of
+        Just a -> do
+            case a of
+                Left uniqueAud -> do 
+                    when (Just uniqueAud /= JWT.stringOrURI (clientId master)) $ permissionDenied "Audiência inválida."
+                Right _ -> permissionDenied "Tokens com múltiplas audiências não suportados pelo sistema." -- TODO: have to check the list of auds and see if it contains our client id.
+        _ -> permissionDenied "Audiência não definida."
+    when (iss /= JWT.stringOrURI (configIssuer master)) $
+        permissionDenied "Valor de iss inválido."
+    when (isNothing claimset) $
+        permissionDenied "Conjunto de claims inválido."
+    mExpired <- liftIO $ isDateExpired expiration . JWT.numericDate <$> getPOSIXTime
+    case mExpired of
+        Nothing -> permissionDenied "Data de expiração não definida."
+        Just expired -> when expired $ permissionDenied "Data de expiração inválida."
+    return Authorized
 
 instance YesodAuthPersist App
 

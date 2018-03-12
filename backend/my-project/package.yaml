@@ -46,10 +46,12 @@ dependencies:
 - case-insensitive
 - wai
 - foreign-store
-- dates >=0.2
-- double-conversion >=2.0
-- xlsx >=0.7
-- lens >=4.16
+- gogol
+- gogol-sheets
+- lens
+- load-env
+- jwt
+- email-validate
 
 # The library contains all of our application code. The executable
 # defined below is just a thin wrapper.

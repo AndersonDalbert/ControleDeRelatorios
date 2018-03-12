@@ -10,26 +10,26 @@ module Handler.Atividades where
 
 import Import
 import Data.Text (Text)
-import Data.FileEmbed (embedFile)
-import Data.Aeson
+
+import Reader.GogolReader
 
 data Atividade = Atividade
-	{ index :: Text
-	, nome :: Text
-  , matricula :: Text
-	, dataEnvio :: Text
-  , passou :: Text
-  , erros :: Text
-  , falhas :: Text
-  , pulados :: Text
-  , notaTestes :: Text
-  , notaDesign :: Text
-  , nota :: Text
-	}
+    { aindex :: Text
+    , nome :: Text
+    , matricula :: Text
+    , dataEnvio :: Text
+    , passou :: Text
+    , erros :: Text
+    , falhas :: Text
+    , pulados :: Text
+    , notaTestes :: Text
+    , notaDesign :: Text
+    , nota :: Text
+    }
 
 instance ToJSON Atividade where
     toJSON Atividade {..} = object
-        [ "index" .= index
+        [ "index" .= aindex
         , "nome" .= nome
         , "matricula" .= matricula
         , "dataEnvio" .= dataEnvio
@@ -42,6 +42,25 @@ instance ToJSON Atividade where
         , "nota" .= nota
         ]
 
-getAtividadesR :: Text -> Handler TypedContent
-getAtividadesR text = do return $ TypedContent "application/json"
-																$ toContent $(embedFile "data/R01.json")
+makeItem :: [Text] -> Text -> [Atividade]
+makeItem [] _ = []
+makeItem [aindex, nome, matricula, dataEnvio, passou, erros, falhas, pulados, notaTestes, notaDesign, nota] nomeAtv
+    | nome == nomeAtv = [Atividade aindex nome matricula dataEnvio passou erros falhas pulados notaTestes notaDesign nota]
+    | otherwise = []
+makeItem _ _ = []
+        
+makeItems :: [[Value]] -> Text -> [Atividade]
+makeItems [] _ = []
+makeItems (x:xs) nomeAtv = (makeItem (extractTexts x) nomeAtv) ++ makeItems xs nomeAtv
+        
+optionsAtividadesR :: Text -> Handler RepPlain
+optionsAtividadesR nomeAtv = do
+    addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Methods" "GET, OPTIONS"
+    return $ RepPlain $ toContent ("" :: Text)
+
+getAtividadesR :: Text -> Handler Value
+getAtividadesR nomeAtv = do
+    addHeader "Access-Control-Allow-Origin" "*"
+    sheet <- liftIO $ (coletarDados "" "Sheet1!A:K")
+    returnJson $ makeItems sheet nomeAtv
